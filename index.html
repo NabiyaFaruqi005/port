@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nabiya Faruqi | Data Science & ML</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --navy:   #0A1628;
+            --teal:   #0D9488;
+            --teal-light: #14B8A8;
+            --cream:  #F8F7F4;
+            --slate:  #334155;
+            --muted:  #64748B;
+            --white:  #FFFFFF;
+            --card-bg: #FFFFFF;
+            --border: #E2E8F0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--cream);
+            color: var(--slate);
+            line-height: 1.7;
+        }
+
+        /* ── HEADER ── */
+        .header {
+            min-height: 100vh;
+            background: var(--navy);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* animated grid background */
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(13,148,136,.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(13,148,136,.07) 1px, transparent 1px);
+            background-size: 48px 48px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0%   { background-position: 0 0; }
+            100% { background-position: 48px 48px; }
+        }
+
+        .header-content { position: relative; z-index: 1; }
+
+        .header-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: .75rem;
+            letter-spacing: .2em;
+            color: var(--teal-light);
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .header h1 {
+            font-size: clamp(2.4rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: -.02em;
+            line-height: 1.1;
+        }
+
+        .header h1 span { color: var(--teal-light); }
+
+        .header .subtitle {
+            margin-top: .75rem;
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #94A3B8;
+            max-width: 480px;
+        }
+
+        .pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .pill {
+            font-family: 'Space Mono', monospace;
+            font-size: .72rem;
+            padding: .3rem .9rem;
+            border: 1px solid rgba(13,148,136,.4);
+            border-radius: 999px;
+            color: var(--teal-light);
+            background: rgba(13,148,136,.08);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1.8rem;
+        }
+
+        .social-links a {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.2);
+            display: flex; align-items: center; justify-content: center;
+            color: #94A3B8;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: border-color .2s, color .2s, background .2s;
+        }
+        .social-links a:hover { border-color: var(--teal); color: var(--teal-light); background: rgba(13,148,136,.1); }
+
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 2rem;
+            color: #475569;
+            font-size: 1.2rem;
+            text-decoration: none;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(8px); }
+        }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 900px; margin: 0 auto; padding: 5rem 1.5rem; }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--teal), transparent);
+        }
+
+        /* ── CARD ── */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.75rem;
+            transition: box-shadow .2s, transform .2s;
+        }
+        .card:hover { box-shadow: 0 8px 30px rgba(0,0,0,.08); transform: translateY(-2px); }
+
+        /* ── ABOUT ── */
+        #about .card p {
+            font-size: 1.02rem;
+            color: var(--slate);
+        }
+        .contact-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem 1.5rem;
+            margin-top: 1rem;
+            font-size: .88rem;
+            color: var(--muted);
+        }
+        .contact-meta a { color: var(--teal); text-decoration: none; }
+        .contact-meta span { display: flex; align-items: center; gap: .35rem; }
+
+        /* ── SKILLS GRID ── */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.25rem;
+        }
+        .skill-category h3 {
+            font-size: .95rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+        .skill-category h3 i { color: var(--teal); }
+        .skill-category ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+        .skill-category ul li {
+            font-size: .88rem;
+            padding: .35rem .75rem;
+            background: var(--cream);
+            border-radius: 6px;
+            border-left: 3px solid var(--teal);
+        }
+
+        /* ── TIMELINE (Experience) ── */
+        .timeline { position: relative; padding-left: 1.5rem; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 8px; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--teal), transparent);
+        }
+        .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 1.5rem; }
+        .timeline-dot {
+            position: absolute;
+            left: -1.98rem; top: 6px;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--teal);
+            border: 2px solid var(--cream);
+        }
+        .timeline-item .date {
+            font-family: 'Space Mono', monospace;
+            font-size: .75rem;
+            color: var(--teal);
+            display: block;
+            margin-bottom: .3rem;
+        }
+        .timeline-item h3 { font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+        .timeline-item .company { font-size: .9rem; color: var(--muted); margin-bottom: .6rem; }
+        .timeline-item ul { list-style: disc; padding-left: 1.25rem; }
+        .timeline-item ul li { font-size: .9rem; margin-bottom: .4rem; }
+
+        /* ── PROJECTS ── */
+        .projects-grid { display: grid; gap: 1.25rem; }
+        .project-card { border-left: 4px solid var(--teal); }
+        .project-card h3 { font-size: 1rem; font-weight: 600; color: var(--navy); margin-bottom: .4rem; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .75rem; }
+        .tag {
+            font-family: 'Space Mono', monospace;
+            font-size: .68rem;
+            padding: .2rem .6rem;
+            background: rgba(13,148,136,.1);
+            color: var(--teal);
+            border-radius: 4px;
+        }
+        .project-card ul { list-style: disc; padding-left: 1.25rem; }
+        .project-card ul li { font-size: .88rem; margin-bottom: .3rem; }
+
+        /* ── GRID LAYOUT (Edu / Cert) ── */
+        .grid-layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .edu-item h3 { font-size: .97rem; font-weight: 600; color: var(--navy); margin-bottom: .3rem; }
+        .edu-item p { font-size: .88rem; color: var(--muted); }
+        .cert-item p { font-size: .88rem; color: var(--slate); }
+
+        /* ── CONTACT ── */
+        #contact .card { text-align: center; }
+        #contact .card p { color: var(--muted); margin-bottom: 1.5rem; }
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .75rem 2rem;
+            background: var(--teal);
+            color: var(--white);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: .95rem;
+            transition: background .2s, transform .2s;
+        }
+        .contact-btn:hover { background: var(--teal-light); transform: translateY(-2px); }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: .85rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 600px) {
+            .container { padding: 3.5rem 1rem; }
+            .skills-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <p class="header-eyebrow">Portfolio · Data Science &amp; ML</p>
+            <h1>Nabiya <span>Faruqi</span></h1>
+            <p class="subtitle">Turning data into decisions — Python · SQL · Machine Learning</p>
+            <div class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">SQL</span>
+                <span class="pill">Machine Learning</span>
+                <span class="pill">Deep Learning</span>
+                <span class="pill">Data Analytics</span>
+            </div>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:faruqinabiya05@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <a href="#about" class="scroll-down-arrow" aria-label="Scroll down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </header>
+
+    <main>
+
+        <!-- ABOUT -->
+        <section id="about" class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="card">
+                <p>B.Tech Computer Science graduate with hands-on experience in Python, SQL, and data analytics. Built end-to-end ML pipelines and performed data preprocessing, cleaning, and visualization using Pandas, NumPy, and Matplotlib. Familiar with web technologies and comfortable writing SQL queries for data extraction and validation.</p>
+                <div class="contact-meta">
+                    <span><i class="fas fa-phone"></i> +91 98120-08786</span>
+                    <span><i class="fas fa-map-marker-alt"></i> Kalka, Haryana</span>
+                    <span><i class="fas fa-envelope"></i> <a href="mailto:faruqinabiya05@gmail.com">faruqinabiya05@gmail.com</a></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="card skill-category">
+                    <h3><i class="fas fa-code"></i> Languages</h3>
+                    <ul>
+                        <li>Python (basic)</li>
+                        <li>SQL (basic)</li>
+                        <li>HTML / CSS</li>
+                        <li>JavaScript (basic)</li>
+                    </ul>
+                </div>
+                <div class="card skill-category">
+                    <h3><i class="fas fa-chart-bar"></i> Data &amp; Analytics</h3>
+                    <ul>
+                        <li>Pandas</li>
+                        <li>NumPy</li>
+                        <li>Matplotlib</li>
+                        <li>Seaborn</li>
+                    </ul>
+                </div>
+                <div class="card skill-category">
+                    <h3><i class="fas fa-brain"></i> ML / DL</h3>
+                    <ul>
+                        <li>Scikit-learn</li>
+                        <li>TensorFlow / Keras</li>
+                        <li>Random Forest</li>
+                        <li>ANN · CNN · RNN</li>
+                    </ul>
+                </div>
+                <div class="card skill-category">
+                    <h3><i class="fas fa-tools"></i> Tools</h3>
+                    <ul>
+                        <li>Jupyter Notebook</li>
+                        <li>Google Colab</li>
+                        <li>VS Code</li>
+                        <li>Google Analytics 4</li>
+                        <li>Google Tag Manager</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item card">
+                    <div class="timeline-dot"></div>
+                    <span class="date">Jan 2026 – Jun 2026</span>
+                    <h3>Data Science Trainee</h3>
+                    <p class="company">Netmax Technologies Pvt. Ltd.</p>
+                    <ul>
+                        <li>Wrote SQL queries (SELECT, JOIN, GROUP BY, aggregation) for data extraction and relational database management in MySQL.</li>
+                        <li>Performed end-to-end data preprocessing — cleaning messy datasets, handling nulls, feature encoding, and scaling using Pandas and NumPy.</li>
+                        <li>Visualized model performance and data distributions using Matplotlib and Seaborn, creating clear charts for non-technical stakeholders.</li>
+                        <li>Completed training covering Python, SQL, ML, and Neural Networks (ANN, CNN, RNN) with TensorFlow and Keras; evaluated models using accuracy score and R² score.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="card project-card">
+                    <h3>Car Price Estimation System</h3>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Random Forest</span>
+                        <span class="tag">GridSearchCV</span>
+                        <span class="tag">Pandas</span>
+                    </div>
+                    <ul>
+                        <li>Cleaned and preprocessed a real-world dataset: handled missing values, encoded categorical features, and selected relevant features.</li>
+                        <li>Achieved 97% R² using GridSearchCV hyperparameter tuning on Random Forest; documented model performance metrics in structured summaries.</li>
+                    </ul>
+                </div>
+                <div class="card project-card">
+                    <h3>Intelligent Email Filtering (NLP)</h3>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Simple RNN</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">Tokenization</span>
+                    </div>
+                    <ul>
+                        <li>Processed 5,572 text messages: tokenization, cleaning, padding, and TF-IDF vectorization.</li>
+                        <li>Achieved 98.3% classification accuracy; wrote reusable Python scripts for text cleaning and data preparation.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section id="education" class="container">
+            <h2 class="section-title">Education</h2>
+            <div class="grid-layout">
+                <div class="card edu-item">
+                    <h3>B.Tech in Computer Science</h3>
+                    <p>Chandigarh Engineering College (CGC Landran)</p>
+                    <p><strong>CGPA:</strong> 8.6 / 10 &nbsp;·&nbsp; 2022 – 2026</p>
+                </div>
+                <div class="card edu-item">
+                    <h3>12th – CBSE</h3>
+                    <p>St. Vivekanand Millennium School HMT, Pinjore</p>
+                    <p><strong>Score:</strong> 80.60% &nbsp;·&nbsp; 2022</p>
+                </div>
+                <div class="card edu-item">
+                    <h3>10th – CBSE</h3>
+                    <p>Sophia Convent School, Kalka</p>
+                    <p><strong>Score:</strong> 84.60% &nbsp;·&nbsp; 2020</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section id="certifications" class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="grid-layout">
+                <div class="card cert-item"><p>📊 Data Analytics Job Simulation – Forage (2025)</p></div>
+                <div class="card cert-item"><p>🗄️ NPTEL – DBMS, IIT (Jul–Sep 2024)</p></div>
+                <div class="card cert-item"><p>🐍 Red Hat – Introduction to Python Programming (Apr 2024)</p></div>
+                <div class="card cert-item"><p>☁️ AWS – Cloud Operations (Mar 2024)</p></div>
+                <div class="card cert-item"><p>☁️ AWS – Data Engineering (Oct 2023)</p></div>
+                <div class="card cert-item"><p>🌐 HTML Attributes and Tags – Great Learning (Jul 2023)</p></div>
+            </div>
+        </section>
+
+        <!-- LEADERSHIP -->
+        <section id="leadership" class="container">
+            <h2 class="section-title">Leadership &amp; Activities</h2>
+            <div class="grid-layout">
+                <div class="card">
+                    <h3 style="font-size:.97rem;font-weight:600;color:var(--navy);margin-bottom:.4rem;">Code Rangers Club, CGC Landran</h3>
+                    <p style="font-size:.88rem;">Led technical debugging events (Web Dev) with 100+ student participation; coordinated logistics and communications for large-scale events.</p>
+                </div>
+                <div class="card">
+                    <h3 style="font-size:.97rem;font-weight:600;color:var(--navy);margin-bottom:.4rem;">Parivartan 2024 &amp; 2025, CGC Landran</h3>
+                    <p style="font-size:.88rem;">Student Coordinator — managed multi-team collaboration and prepared structured update reports for organisers.</p>
+                </div>
+                <div class="card">
+                    <h3 style="font-size:.97rem;font-weight:600;color:var(--navy);margin-bottom:.4rem;">Zest-o-Fiesta 2024, CGC Landran</h3>
+                    <p style="font-size:.88rem;">Student Coordinator for Project Display — oversaw event logistics and student presentations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="container">
+            <div class="card" style="text-align:center;">
+                <h2 class="section-title" style="justify-content:center;">Get In Touch</h2>
+                <p>Open to Data Science, ML, and Data Analytics opportunities. Let's connect!</p>
+                <a href="mailto:faruqinabiya05@gmail.com" class="contact-btn">Say Hello! <i class="fas fa-paper-plane"></i></a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Nabiya Faruqi. Built with purpose ✨</p>
+    </footer>
+
+    <script>
+        // Smooth reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.style.opacity = '1';
+                    e.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity .5s ease, transform .5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
